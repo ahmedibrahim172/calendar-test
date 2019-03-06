@@ -17,6 +17,8 @@
 		09414404222D58A200BEFD22 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09414400222D58A100BEFD22 /* ViewController.swift */; };
 		09414405222D58A200BEFD22 /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09414401222D58A100BEFD22 /* DateCollectionViewCell.swift */; };
 		09414406222D58A200BEFD22 /* CalendarVars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09414402222D58A200BEFD22 /* CalendarVars.swift */; };
+		098EC4B7222F2B510085D577 /* createEventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098EC4B6222F2B510085D577 /* createEventViewController.swift */; };
+		098EC4B9222F30010085D577 /* NoteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 098EC4B8222F30010085D577 /* NoteCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +55,8 @@
 		09414400222D58A100BEFD22 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		09414401222D58A100BEFD22 /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		09414402222D58A200BEFD22 /* CalendarVars.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarVars.swift; sourceTree = "<group>"; };
+		098EC4B6222F2B510085D577 /* createEventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = createEventViewController.swift; sourceTree = "<group>"; };
+		098EC4B8222F30010085D577 /* NoteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 				09414401222D58A100BEFD22 /* DateCollectionViewCell.swift */,
 				094143FF222D58A000BEFD22 /* Main.storyboard */,
 				09414400222D58A100BEFD22 /* ViewController.swift */,
+				098EC4B8222F30010085D577 /* NoteCell.swift */,
+				098EC4B6222F2B510085D577 /* createEventViewController.swift */,
 				094143D8222D584900BEFD22 /* Assets.xcassets */,
 				094143DA222D584900BEFD22 /* LaunchScreen.storyboard */,
 				094143DD222D584900BEFD22 /* Info.plist */,
@@ -270,6 +276,8 @@
 				094143CF222D584000BEFD22 /* AppDelegate.swift in Sources */,
 				09414406222D58A200BEFD22 /* CalendarVars.swift in Sources */,
 				094143D7222D584000BEFD22 /* test.xcdatamodeld in Sources */,
+				098EC4B9222F30010085D577 /* NoteCell.swift in Sources */,
+				098EC4B7222F2B510085D577 /* createEventViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

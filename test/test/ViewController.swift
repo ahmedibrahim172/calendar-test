@@ -1,14 +1,17 @@
 
 
 import UIKit
+import CoreData
 
-class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource , UITableViewDelegate , UITableViewDataSource {
    
     
+    @IBOutlet weak var today: UILabel!
     @IBOutlet weak var Calendar: UICollectionView!
     @IBOutlet weak var MonthLabel: UILabel!
     
-   
+    @IBOutlet weak var listEventsTable: UITableView!
+    
     
     let Months = ["January","February","March","April","May","June","July","August","September","October","November","December"]
     
@@ -32,18 +35,47 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     var dayCounter = 0
     
+    
+    var lisNotes=[MyNotes]();
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         currentMonth = Months[month]
         MonthLabel.text = "\(currentMonth) \(year)"
+        today.text = "\(day) \(currentMonth) \(year)"
         if weekday == 0 {
             weekday = 7
         }
+       
         GetStartDateDayPosition()
+        loadNotes()
     }
+    
 
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return lisNotes.count
+    }
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1;
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell: NoteCell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! NoteCell
+        cell.SetCell(note: lisNotes[indexPath.row])
+        return cell
+    }
+    
+    func loadNotes() {
+        let fetchRequest: NSFetchRequest<MyNotes> = MyNotes.fetchRequest()
+        
+        do{
+            lisNotes = try context.fetch(fetchRequest)
+            listEventsTable.reloadData()
+            
+        }catch{
+        }}
 //-----------(Calculates the number of "empty" boxes at the start of every month")------------------------------------------------------
     
     func GetStartDateDayPosition() {
@@ -103,8 +135,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             currentMonth = Months[month]
             MonthLabel.text = "\(currentMonth) \(year)"
-            
+            today.text = "\(day) \(currentMonth) \(year)"
             Calendar.reloadData()
+            listEventsTable.reloadData()
         default:
             Direction = 1
             
@@ -114,8 +147,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
             currentMonth = Months[month]
             MonthLabel.text = "\(currentMonth) \(year)"
-          
+            today.text = "\(day) \(currentMonth) \(year)"
             Calendar.reloadData()
+    //        listEventsTable.reloadData()
         }
     }
     
@@ -141,8 +175,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             currentMonth = Months[month]
             MonthLabel.text = "\(currentMonth) \(year)"
+            today.text = "\(day) \(currentMonth) \(year)"
             Calendar.reloadData()
-            
+  //          listEventsTable.reloadData()
         default:
             Direction = -1
 
@@ -152,7 +187,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
             
             currentMonth = Months[month]
             MonthLabel.text = "\(currentMonth) \(year)"
+            today.text = "\(day) \(currentMonth) \(year)"
             Calendar.reloadData()
+//listEventsTable.reloadData()
         }
     }
     
@@ -180,7 +217,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         cell.DateLabel.textColor = UIColor.black
         
         cell.Circle.isHidden = true
-        
+        listEventsTable.reloadData()
         if cell.isHidden{
             cell.isHidden = false
         }
@@ -203,16 +240,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         switch indexPath.row { //weekend days color
         case 5,6,12,13,19,20,26,27,33,34:
             if Int(cell.DateLabel.text!)! > 0 {
-                cell.DateLabel.textColor = UIColor.lightGray
+                cell.DateLabel.textColor = UIColor.black
             }
         default:
             break
         }
-//       if currentMonth == Months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && indexPath.row + 1 - NumberOfEmptyBox == day{
-//        cell.Circle.isHidden = false
-//        cell.DrawCircle()
+     if currentMonth == Months[calendar.component(.month, from: date) - 1] && year == calendar.component(.year, from: date) && indexPath.row + 1 - NumberOfEmptyBox == day{
+        cell.Circle.isHidden = false
+          cell.DrawCircle()
+        
 //        cell.isUserInteractionEnabled = true
-//        }
+        }
         
         return cell
         
@@ -222,6 +260,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //        Scell.Circle.isHidden = true
         var Scell=Calendar.cellForItem(at: indexPath)
         Scell?.backgroundColor=UIColor.clear
+        listEventsTable.reloadData()
+      //  Calendar.reloadData()
         // let lbl = cell?.subviews[1] as! UILabel
         // lbl.textColor = UIColor.blue
     }
@@ -230,7 +270,8 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
        var Scell=Calendar.cellForItem(at: indexPath)
        Scell?.backgroundColor = UIColor.red
-   
+    listEventsTable.reloadData()
+    //Calendar.reloadData()
 //    let e = Calendar.cellForItem(at: indexPath)
 //     var Scell = Calendar.dequeueReusableCell(withReuseIdentifier: "Calendar", for: indexPath) as! DateCollectionViewCell
 //    Scell.Circle.isHidden = false
